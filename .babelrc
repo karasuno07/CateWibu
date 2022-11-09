@@ -1,0 +1,21 @@
+{
+   "plugins": [
+      "@babel/syntax-dynamic-import",
+      [
+         "module-resolver",
+         {
+            "alias": {
+               "~": "./src"
+            }
+         }
+      ]
+   ],
+   "presets": [
+      [
+         "@babel/preset-env",
+         {
+            "modules": false
+         }
+      ]
+   ]
+}
