@@ -1,7 +1,7 @@
 import { settings } from '~/config';
 import { Point } from '~/models';
 
-export default function createImage() {
+export default function createHeart() {
    const canvas = document.createElement('canvas');
    const context = canvas.getContext('2d');
 
@@ -35,7 +35,7 @@ export default function createImage() {
 
    context.closePath();
 
-   context.fillStyle = '#ea80b0';
+   context.fillStyle = '#8578e3';
    context.fill();
 
    // create the image

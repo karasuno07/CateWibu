@@ -1,16 +1,15 @@
-import createImage from './components/Image';
-import { Point, ParticlePool, Particle } from './models';
+import { createHeart } from './components/Shape';
 import { settings } from './config';
+import { ParticlePool, Point } from './models';
+
 import './index.scss';
 
 const canvas = document.getElementById('love-container');
 const context = canvas.getContext('2d');
-const particles = new ParticlePool(settings.particles.length);
-const image = createImage();
-// let particleRate = settings.particles.length / settings.particles.duration;
-// let time = 0;
+const heart = createHeart();
 
 const App = {
+   particles: new ParticlePool(settings.particles.length),
    time: 0,
    config: {
       particleRate: settings.particles.length / settings.particles.duration,
@@ -31,17 +30,23 @@ const App = {
 
          const dir = pos.clone().length(settings.particles.velocity);
 
-         particles.add(canvas.width / 2 + pos.x, canvas.height / 2 - pos.y, dir.x, -dir.y);
+         App.particles.add(canvas.width / 2 + pos.x, canvas.height / 2 - pos.y, dir.x, -dir.y);
       }
 
-      particles.update(deltaTime);
+      App.particles.update(deltaTime);
 
-      particles.draw(context, image);
+      App.particles.draw(context, heart);
    },
    handleEvents: {
       resize() {
          canvas.width = canvas.clientWidth;
          canvas.height = canvas.clientHeight;
+      },
+      move(x, y) {
+         console.log(canvas.clientWidth);
+
+         canvas.width = x;
+         canvas.height = y;
       },
    },
    start() {
@@ -49,6 +54,8 @@ const App = {
 
       this.handleEvents.resize();
       this.render();
+
+      this.handleEvents.move(600, 600);
    },
 };
 
