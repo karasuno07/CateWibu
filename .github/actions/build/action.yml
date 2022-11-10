@@ -7,6 +7,5 @@ runs:
         uses: ./.github/actions/setup
 
       - name: Build project
-        run: yarn add
-             yarn build
+        run: yarn build
         shell: bash
