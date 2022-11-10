@@ -1,0 +1,18 @@
+name: Setup
+description: Setup YARN, Node and install dependencies
+runs:
+  using: composite
+  steps:
+    - name: Install yarn
+      uses: yarn/action-setup@v2
+      with:
+        version: "lts/*"
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: "lts/*"
+
+    - name: Install YARN packages
+      run: yarn install
+      shell: bash

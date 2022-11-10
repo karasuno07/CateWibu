@@ -7,12 +7,14 @@ import './index.scss';
 const canvas = document.getElementById('love-container');
 const context = canvas.getContext('2d');
 const heart = createHeart();
+const defaultConfig = settings.particles;
 
 const App = {
    particles: new ParticlePool(settings.particles.length),
    time: 0,
    config: {
-      particleRate: settings.particles.length / settings.particles.duration,
+      ...defaultConfig,
+      particleRate: defaultConfig.length / defaultConfig.duration,
    },
    render: () => {
       requestAnimationFrame(App.render);
@@ -28,7 +30,7 @@ const App = {
       for (let i = 0; i < amount; i++) {
          const pos = Point.onHeart(Math.PI - 2 * Math.PI * Math.random());
 
-         const dir = pos.clone().length(settings.particles.velocity);
+         const dir = pos.clone().length(App.config.velocity);
 
          App.particles.add(canvas.width / 2 + pos.x, canvas.height / 2 - pos.y, dir.x, -dir.y);
       }
@@ -55,7 +57,7 @@ const App = {
       this.handleEvents.resize();
       this.render();
 
-      this.handleEvents.move(600, 600);
+      //   this.handleEvents.move(600, 600);
    },
 };
 
