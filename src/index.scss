@@ -1,13 +1,34 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
 
 }
 
+body {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+}
+
 #love-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: pink;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: pink;
+	z-index: 1;
+}
+
+#message-container {
+	$dimension: 250px; 
+	$centerBuffer: calc($dimension / 2);
+
+	position: absolute;
+	top: calc(50% - $centerBuffer);
+	left: calc(50% - $centerBuffer);
+	width: $dimension;
+	height: $dimension;
+	border-radius: 50%;
+	background: red;
+	z-index: 2;
 }
