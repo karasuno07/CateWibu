@@ -4,9 +4,7 @@ runs:
   using: composite
   steps:
     - name: Install yarn
-      uses: yarn/action-setup@v2
-      with:
-        version: "lts/*"
+      uses: mskelton/setup-yarn@v1.3.0
 
     - name: Install Node.js
       uses: actions/setup-node@v3
