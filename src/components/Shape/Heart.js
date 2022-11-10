@@ -1,6 +1,8 @@
 import { settings } from '~/config';
 import { Point } from '~/models';
 
+import variables from '~/styles/_color.module.scss';
+
 export default function createHeart() {
    const canvas = document.createElement('canvas');
    const context = canvas.getContext('2d');
@@ -35,7 +37,7 @@ export default function createHeart() {
 
    context.closePath();
 
-   context.fillStyle = '#8578e3';
+   context.fillStyle = variables.primaryColor;
    context.fill();
 
    // create the image

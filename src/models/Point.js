@@ -32,11 +32,16 @@ export default class Point {
       return this;
    }
 
-   static onHeart(t) {
+   static onHeart(t, divider = 1) {
       return new Point(
-         160 * Math.pow(Math.sin(t), 3),
+         (160 * Math.pow(Math.sin(t), 3)) / divider,
 
-         130 * Math.cos(t) - 50 * Math.cos(2 * t) - 20 * Math.cos(3 * t) - 10 * Math.cos(4 * t) + 25
+         (130 * Math.cos(t) -
+            50 * Math.cos(2 * t) -
+            20 * Math.cos(3 * t) -
+            10 * Math.cos(4 * t) +
+            25) /
+            divider
       );
    }
 }

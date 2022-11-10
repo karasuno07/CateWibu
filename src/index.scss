@@ -1,4 +1,9 @@
+@use 'sass:math';
+
 @import 'src/styles/_library.scss';
+@import 'src/styles/_color.module.scss';
+@import 'src/styles/_icon.module.scss';
+@import 'src/styles/_animation.module.scss';
 
 * {
 	box-sizing: border-box;
@@ -10,40 +15,127 @@ body {
 	position: relative;
 	width: 100vw;
 	height: 100vh;
-	background-color: pink;
+	background-color: $pink;
 }
 
 #love-container {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	z-index: 3;
+	z-index: 1;
 }
 
-#message-container {
-	$width: 300px;
-	$height: 300px;
+#gift-container {
+	$width: 200px;
+	$height: 200px;
 
-	@include absolute-center($width, $height);
-	background-color: red;
-	transform: rotate(45deg) translate(20px, 20px);
-	z-index: 2;
+	@include absolute-center-no-transform($width, $height);
+	background-color: rgba($color: $primary, $alpha: 0.5);
+	box-shadow: 5px 5px 10px 0px rgb(0, 0, 0, 0.5);
+	transform: rotate(45deg) translate(calc($width / 20), calc($height / 20));
+	transition: all linear .75s;
+	z-index: 1;
 
 	&::before,
 	&::after {
 		content: '';
-		@include absolute-center($width, $height);
-		border-radius: 50%;
+		position: absolute;
+		width: $width;
+		height: $height;
+		border-width: 0;
 		background-color: inherit;
 	}
 
 	&::before {
+		border-radius: 0 0 calc($width / 2) calc($height / 2);
 		left: -(calc($width / 2));
-		transform: rotate(-45deg);
+		transform: rotate(90deg);
+		box-shadow: 4px 0px 4px 0px rgb(0, 0, 0, 0.5);
 	}
 
 	&::after {
+		border-radius: calc($width / 2) calc($height / 2) 0 0;
 		top: -(calc($width / 2));
-		transform: rotate(45deg);
+		transform: rotate(360deg);
+		box-shadow: 4px 0px 4px 0px rgb(0, 0, 0, 0.5);
+	}
+
+	.bandroll {
+		$bandroll-width: 14px;
+		$bandroll-length: $width;
+		$translate-position: -(calc(($bandroll-width - $bandroll-length) / 2));
+
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		background-color: $orange;
+		width: $bandroll-length;
+		height: $bandroll-width;
+		border-radius: 5px;
+		border-style: double;
+		border-color: brown;
+		z-index: 2;
+
+		&.bandroll-1 {
+			transform: translateY($translate-position);
+		}
+
+		&.bandroll-2 {
+			transform: rotate(90deg) translateX($translate-position);
+		}
+	}
+
+	#open-btn {
+		$circle-width: 50px;
+
+		position: absolute;
+		top: $circle-width * 2;
+		left: $circle-width * 2;
+		border-radius: 50%;
+		width: $circle-width;
+		height: $circle-width;
+		transform: translate(-50%, -50%);
+		background-color: $red;
+		background-image: $star;
+		background-size: 36px;
+		background-position: center;
+		background-repeat: no-repeat;
+		border-width: 0;
+		box-shadow: 1px 1px 3px 3px rgb(0, 0, 0, 0.5);
+		z-index: 3;
+
+		&:hover {
+			cursor: grab;
+			background-color: $darken-red;
+		}
+
+		&:active {
+			background-size: 32px;
+			box-shadow: 1px 1px 3px 1px rgb(0, 0, 0, 0.75);
+		}
+	}
+
+	&.gift-box {
+		transform: rotate(-180deg);
+		box-shadow: -5px -5px 10px 0px rgb(0, 0, 0, 0.5);
+
+		&::before,
+		&::after {
+			display: none;
+		}
+
+		.bandroll {
+			display: block;
+
+			.bandroll-1 {
+				animation: 1s ease-in 1s roll-in;
+			}
+
+			.bandroll-2 {
+				animation: 1s ease-in 1s roll-in;
+			}
+		}
 	}
 }

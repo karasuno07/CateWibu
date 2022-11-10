@@ -1,7 +1,61 @@
-	@mixin absolute-center ($width, $height) {
-		position: absolute;
-		top: calc(50% - $width / 2);
-		left: calc(50% - $height / 2);
-		width: $width;
-		height: $height;
+$XS: 480px;
+$SM: 768px;
+$MD: 1024px;
+$XL: 1200px;
+
+@mixin responsive($canvases) {
+	@each $canvas in $canvases {
+		@if $canvas ==XS {
+			@media only screen and (max-width: #{$XS - 1px}) {
+				@content;
+			}
+		}
+
+		@else if $canvas ==SM {
+			@media only screen and (min-width: $XS) and (max-width: #{$SM - 1px}) {
+				@content;
+			}
+		}
+
+		@else if $canvas ==MD {
+			@media only screen and (min-width: $SM) and (max-width: #{$MD - 1px}) {
+				@content;
+			}
+		}
+
+		@else if $canvas ==XL {
+			@media only screen and (min-width: $MD) {
+				@content;
+			}
+		}
 	}
+}
+
+@mixin absolute-center($offsetX: 0px, $offsetY: 0px) {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(calc(-50% + $offsetX), calc(-50% + $offsetY));
+}
+
+@mixin absolute-center-no-transform ($width, $height) {
+	position: absolute;
+	top: calc(50% - $width / 2);
+	left: calc(50% - $height / 2);
+	width: $width;
+	height: $height;
+}
+
+@mixin keyframes($name) {
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+
+	@keyframes #{$name} {
+		@content;
+	}
+}
