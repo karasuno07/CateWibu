@@ -1,8 +1,9 @@
+@import 'src/styles/_library.scss';
+
 * {
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
-
 }
 
 body {
@@ -20,15 +21,29 @@ body {
 }
 
 #message-container {
-	$dimension: 250px; 
-	$centerBuffer: calc($dimension / 2);
+	$width: 300px;
+	$height: 300px;
 
-	position: absolute;
-	top: calc(50% - $centerBuffer);
-	left: calc(50% - $centerBuffer);
-	width: $dimension;
-	height: $dimension;
-	border-radius: 50%;
-	background: red;
+	@include absolute-center($width, $height);
+	background-color: red;
+	transform: rotate(45deg) translate(20px, 20px);
 	z-index: 2;
+
+	&::before,
+	&::after {
+		content: '';
+		@include absolute-center($width, $height);
+		border-radius: 50%;
+		background-color: inherit;
+	}
+
+	&::before {
+		left: -(calc($width / 2));
+		transform: rotate(-45deg);
+	}
+
+	&::after {
+		top: -(calc($width / 2));
+		transform: rotate(45deg);
+	}
 }

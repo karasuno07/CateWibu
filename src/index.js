@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { createHeart } from './components/Shape';
 import { settings } from './config';
 import { ParticlePool, Point } from './models';
@@ -15,6 +17,16 @@ const App = {
    config: {
       ...defaultConfig,
       particleRate: defaultConfig.length / defaultConfig.duration,
+   },
+   overrideConfig({ length, duration, velocity, effect, size }) {
+      const overriddenConfig = {};
+      if (_.isNumber(length)) overriddenConfig.length = length;
+      if (_.isNumber(duration)) overriddenConfig.duration = duration;
+      if (_.isNumber(velocity)) overriddenConfig.velocity = velocity;
+      if (_.isNumber(effect)) overriddenConfig.effect = effect;
+      if (_.isNumber(size)) overriddenConfig.size = size;
+
+      this.config = { ...this.config, ...overriddenConfig };
    },
    render: () => {
       requestAnimationFrame(App.render);
@@ -55,9 +67,10 @@ const App = {
       window.addEventListener('resize', this.handleEvents.resize);
 
       this.handleEvents.resize();
+      this.overrideConfig({ length: 1000, velocity: 150 });
       this.render();
 
-      //   this.handleEvents.move(600, 600);
+      this.handleEvents.move(1650, 900);
    },
 };
 
