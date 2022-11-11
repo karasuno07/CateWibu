@@ -1,9 +1,12 @@
 @use 'sass:math';
 
 @import 'src/styles/_library.scss';
+@import 'src/styles/_variable.module.scss';
 @import 'src/styles/_color.module.scss';
 @import 'src/styles/_icon.module.scss';
+@import 'src/styles/_font.module.scss';
 @import 'src/styles/_animation.module.scss';
+
 
 * {
 	box-sizing: border-box;
@@ -11,11 +14,38 @@
 	margin: 0;
 }
 
-body {
+#root {
 	position: relative;
 	width: 100vw;
 	height: 100vh;
 	background-color: $pink;
+}
+
+#counter {
+	@include absolute-center(0px, 0px);
+	opacity: 0;
+	width: 80pt;
+	height: 80pt;
+	transform-origin: bottom;
+	filter: url(#threshold) blur(0.6px);
+
+	&.show {
+		opacity: 1;
+		transition: opacity .5s linear;
+		z-index: 10;
+	}
+	
+	#text-span-1,
+	#text-span-2 {
+		position: absolute;
+		width: 100%;
+		display: inline-block;
+		font-family: "Raleway", sans-serif;
+		font-size: 80px;
+		text-align: center;
+		color: white;
+		user-select: none;
+	}
 }
 
 #love-container {
@@ -26,43 +56,41 @@ body {
 }
 
 #gift-container {
-	$width: 200px;
-	$height: 200px;
 
-	@include absolute-center-no-transform($width, $height);
+
+	@include absolute-center-no-transform($gift-dimension, $gift-dimension);
 	background-color: rgba($color: $primary, $alpha: 0.5);
 	box-shadow: 5px 5px 10px 0px rgb(0, 0, 0, 0.5);
-	transform: rotate(45deg) translate(calc($width / 20), calc($height / 20));
-	transition: all linear .75s;
 	z-index: 1;
 
 	&::before,
 	&::after {
+		display: none;
 		content: '';
 		position: absolute;
-		width: $width;
-		height: $height;
+		width: $gift-dimension;
+		height: $gift-dimension;
 		border-width: 0;
 		background-color: inherit;
 	}
 
 	&::before {
-		border-radius: 0 0 calc($width / 2) calc($height / 2);
-		left: -(calc($width / 2));
+		border-radius: 0 0 calc($gift-dimension / 2) calc($gift-dimension / 2);
+		left: -(calc($gift-dimension / 2));
 		transform: rotate(90deg);
 		box-shadow: 4px 0px 4px 0px rgb(0, 0, 0, 0.5);
 	}
 
 	&::after {
-		border-radius: calc($width / 2) calc($height / 2) 0 0;
-		top: -(calc($width / 2));
+		border-radius: calc($gift-dimension / 2) calc($gift-dimension / 2) 0 0;
+		top: -(calc($gift-dimension / 2));
 		transform: rotate(360deg);
 		box-shadow: 4px 0px 4px 0px rgb(0, 0, 0, 0.5);
 	}
 
 	.bandroll {
 		$bandroll-width: 14px;
-		$bandroll-length: $width;
+		$bandroll-length: $gift-dimension;
 		$translate-position: -(calc(($bandroll-width - $bandroll-length) / 2));
 
 		display: none;
@@ -106,6 +134,10 @@ body {
 		box-shadow: 1px 1px 3px 3px rgb(0, 0, 0, 0.5);
 		z-index: 3;
 
+		&.fade {
+			animation: fade-in .5s linear 1s forwards;
+		}
+
 		&:hover {
 			cursor: grab;
 			background-color: $darken-red;
@@ -117,13 +149,30 @@ body {
 		}
 	}
 
+	&:not(.gift-box) {
+		transform: rotate(45deg) translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
+		transition: all linear .75s;
+
+
+		&::before {
+			display: block;
+			transform: rotate(90deg);
+			transition: display 1s linear 2s;
+		}
+
+		&::after {
+			display: block;
+			transform: rotate(360deg);
+			transition: display 1s linear 2s;
+		}
+	}
+
 	&.gift-box {
 		transform: rotate(-180deg);
 		box-shadow: -5px -5px 10px 0px rgb(0, 0, 0, 0.5);
 
-		&::before,
-		&::after {
-			display: none;
+		#open-btn {
+			box-shadow: -1px -1px 3px 3px rgb(0, 0, 0, 0.5);
 		}
 
 		.bandroll {

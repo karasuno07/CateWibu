@@ -1,13 +1,14 @@
-import _ from 'lodash';
-
-import { createHeart } from './components/Shape';
+import BGM from '~/components/BGM';
 import Canvas from './components/Canvas';
+import Counter from '~/components/Counter';
 import Gift from './components/Gift';
+
+console.log(BGM);
 
 import './index.scss';
 
 const root = document.getElementById('root');
-const injectElements = [Canvas, Gift];
+const injectElements = [Canvas, Gift, BGM, Counter];
 
 injectElements.forEach((element) => root.appendChild(element));
 /* ===================================================================================================== */

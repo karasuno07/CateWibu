@@ -1,8 +1,11 @@
 import _ from 'lodash';
-import { HeartBump } from '~/animations';
+import { HeartBump, Morph } from '~/animations';
 import Canvas from '~/components/Canvas';
+import Counter from '~/components/Counter';
+import BGM from '~/components/BGM';
 
 const HeartBumpAnimation = HeartBump(Canvas);
+const TextMorphAnimation = Morph(Counter, 4);
 
 const OpenButton = () => {
    const element = document.createElement('button');
@@ -15,12 +18,22 @@ const OpenButton = () => {
    }
 
    const events = {
-      click: function onClick(event) {
+      click: async function onClick(event) {
          const giftContainer = document.getElementById('gift-container');
+         const openButton = document.getElementById('open-btn');
 
          giftContainer.classList.toggle('gift-box');
+         openButton.classList.add('fade');
 
-         HeartBumpAnimation.start();
+         setTimeout(() => {
+            TextMorphAnimation.start();
+         }, 1500);
+
+         setTimeout(() => {
+            BGM.play();
+         }, 5500);
+
+         //  HeartBumpAnimation.start();
       },
    };
    for (const [name, fn] of Object.entries(events)) {

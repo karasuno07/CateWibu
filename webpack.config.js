@@ -47,8 +47,15 @@ const config = {
             use: cssStyleLoaders,
          },
          {
-            test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+            test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif|ico)$/i,
             type: 'asset/resource',
+         },
+         {
+            test: /\.mp[34]$/i,
+            type: 'asset/resource',
+            generator: {
+               name: '[path][name].[ext]',
+            },
          },
 
          // Add your rules for custom modules here
