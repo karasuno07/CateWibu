@@ -1,18 +1,25 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require('path');
+const { ProvidePlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
 const cssStyleLoaders = ['style-loader', 'css-loader', 'postcss-loader'];
 
+const SOURCE_PATH = path.resolve(__dirname, 'src');
+const PUBLIC_PATH = path.resolve(__dirname, 'public');
+const BUILD_PATH = path.resolve(__dirname, 'build');
+
 const config = {
-   entry: path.resolve(__dirname, 'src', 'index.js'),
+   entry: [path.resolve(SOURCE_PATH, 'index.js')],
    output: {
-      path: path.resolve(__dirname, 'build'),
+      path: BUILD_PATH,
       filename: isProduction ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js',
       clean: true,
    },
@@ -25,9 +32,30 @@ const config = {
    },
    plugins: [
       new HtmlWebpackPlugin({
-         template: path.resolve(__dirname, 'public', 'index.html'),
+         template: path.resolve(PUBLIC_PATH, 'index.html'),
+         favicon: path.resolve(PUBLIC_PATH, 'favicon.ico'),
       }),
-      new CleanWebpackPlugin(),
+      new ProvidePlugin({
+         _: 'lodash',
+      }),
+      new WebpackManifestPlugin({
+         publicPath: PUBLIC_PATH,
+         generate(seed, files, entries) {
+            return {
+               short_name: 'Love',
+               name: 'My Love for Yen Nhi',
+               icons: [
+                  {
+                     src: 'favicon.ico',
+                     sizes: '64x64 32x32 24x24 16x16',
+                     type: 'image/x-icon',
+                  },
+               ],
+               start_url: '.',
+               display: 'standalone',
+            };
+         },
+      }),
 
       // Add your plugins here
       // Learn more about plugins from https://webpack.js.org/configuration/plugins/
@@ -47,15 +75,8 @@ const config = {
             use: cssStyleLoaders,
          },
          {
-            test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif|ico)$/i,
+            test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
             type: 'asset/resource',
-         },
-         {
-            test: /\.mp[34]$/i,
-            type: 'asset/resource',
-            generator: {
-               name: '[path][name].[ext]',
-            },
          },
 
          // Add your rules for custom modules here
@@ -68,8 +89,19 @@ module.exports = () => {
    if (isProduction) {
       config.mode = 'production';
 
-      // @ts-ignore
-      config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
+      config.plugins.push(
+         // @ts-ignore
+         new WorkboxWebpackPlugin.GenerateSW(),
+         new CopyWebpackPlugin({
+            patterns: [
+               {
+                  from: path.resolve(PUBLIC_PATH, 'soundtracks'),
+                  to: path.resolve(BUILD_PATH, 'soundtracks'),
+               },
+            ],
+         }),
+         new CleanWebpackPlugin()
+      );
    } else {
       config.mode = 'development';
    }

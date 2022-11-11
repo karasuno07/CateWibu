@@ -3,8 +3,8 @@ const BGM = () => {
 
    const attributes = {
       id: 'bgm',
-      src: '/soundtracks/bgm.mp3',
-	  loop: true,
+      src: './soundtracks/BGM_2.mp3',
+      loop: true,
       preload: true,
    };
 
