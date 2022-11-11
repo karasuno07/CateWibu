@@ -34,7 +34,7 @@
 		transition: opacity .5s linear;
 		z-index: 10;
 	}
-	
+
 	#text-span-1,
 	#text-span-2 {
 		position: absolute;
@@ -93,11 +93,10 @@
 		$bandroll-length: $gift-dimension;
 		$translate-position: -(calc(($bandroll-width - $bandroll-length) / 2));
 
-		display: none;
+
 		position: absolute;
 		top: 0;
 		left: 0;
-
 		background-color: $orange;
 		width: $bandroll-length;
 		height: $bandroll-width;
@@ -132,7 +131,7 @@
 		background-repeat: no-repeat;
 		border-width: 0;
 		box-shadow: 1px 1px 3px 3px rgb(0, 0, 0, 0.5);
-		z-index: 3;
+		z-index: 100;
 
 		&.fade {
 			animation: fade-in .5s linear 1s forwards;
@@ -153,7 +152,6 @@
 		transform: rotate(45deg) translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
 		transition: all linear .75s;
 
-
 		&::before {
 			display: block;
 			transform: rotate(90deg);
@@ -165,6 +163,16 @@
 			transform: rotate(360deg);
 			transition: display 1s linear 2s;
 		}
+
+		.bandroll {
+			&.bandroll-1 {
+				animation: roll 1s ease-in 1.5s forwards;
+			}
+
+			&.bandroll-2 {
+				animation: roll 1s ease-in 2.5s forwards;
+			}
+		}
 	}
 
 	&.gift-box {
@@ -173,18 +181,6 @@
 
 		#open-btn {
 			box-shadow: -1px -1px 3px 3px rgb(0, 0, 0, 0.5);
-		}
-
-		.bandroll {
-			display: block;
-
-			.bandroll-1 {
-				animation: 1s ease-in 1s roll-in;
-			}
-
-			.bandroll-2 {
-				animation: 1s ease-in 1s roll-in;
-			}
 		}
 	}
 }
