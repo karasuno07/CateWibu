@@ -1,15 +1,32 @@
-const Counter = () => {
+export const countEvent = new Event('count');
+
+const Counter = (countTimes = 5) => {
+   const texts = new Array(countTimes)
+      .fill('')
+      .map((_, index) => index + 1)
+      .reverse();
+   let pos = 0;
+
    const element = document.createElement('div');
    element.id = 'counter';
 
    const textSpan1 = document.createElement('span');
-   textSpan1.id = 'text-span-1';
+   textSpan1.id = 'text-span';
 
-   const textSpan2 = document.createElement('span');
-   textSpan2.id = 'text-span-2';
+   element.addEventListener(countEvent.type, function () {
+      element.classList.add('show');
+
+      let counter = setInterval(() => {
+         if (pos === texts.length) {
+            clearInterval(counter);
+            element.classList.remove('show');
+         } else {
+            textSpan1.textContent = texts[pos++];
+         }
+      }, 1000);
+   });
 
    element.appendChild(textSpan1);
-   element.appendChild(textSpan2);
 
    return element;
 };

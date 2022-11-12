@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { HeartBump } from '~/animations';
 import Canvas from '~/components/Canvas';
-import Counter from '~/components/Counter';
+import Counter, { countEvent } from '~/components/Counter';
 import BGM from '~/components/BGM';
 
 const HeartBumpAnimation = HeartBump(Canvas);
@@ -24,7 +24,9 @@ const OpenButton = () => {
          giftContainer.classList.toggle('gift-box');
          openButton.classList.add('fade');
 
-         setTimeout(() => {}, 1500);
+         setTimeout(() => {
+            Counter.dispatchEvent(countEvent);
+         }, 1500);
 
          setTimeout(() => {
             BGM.play();
