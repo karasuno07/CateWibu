@@ -41,7 +41,7 @@
 	50% {
 		opacity: 0;
 		background-color: #ff0000;
-		transform: rotate(45deg) translate(calc($gift-dimension / 20), calc($gift-dimension / 20)) scale(1.2);
+		transform: scale(1.0) rotate(45deg) translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
 	}
 
 	75% {
