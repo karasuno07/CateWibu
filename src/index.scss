@@ -56,43 +56,41 @@
 }
 
 #gift-container {
-
-
 	@include absolute-center-no-transform($gift-dimension, $gift-dimension);
 	background-color: rgba($color: $primary, $alpha: 0.5);
-	box-shadow: 5px 5px 10px 0px rgb(0, 0, 0, 0.5);
+	box-shadow: 5px 5px 10px 0px rgb(0, 0, 0, 0.33);
 	z-index: 1;
 
 	&::before,
 	&::after {
-		display: none;
 		content: '';
 		position: absolute;
-		width: $gift-dimension;
-		height: $gift-dimension;
 		border-width: 0;
 		background-color: inherit;
+		width: $gift-dimension;
+		height: 0;
 	}
 
 	&::before {
 		border-radius: 0 0 calc($gift-dimension / 2) calc($gift-dimension / 2);
-		left: -(calc($gift-dimension / 2));
-		transform: rotate(90deg);
-		box-shadow: 4px 0px 4px 0px rgb(0, 0, 0, 0.5);
+		right: calc($gift-dimension / 2);
+		transform: rotate(90deg) translateX($gift-dimension);
+		transform-origin: top right;
+		box-shadow: 4px 4px 5px 0px rgb(0, 0, 0, 0.2);
 	}
 
 	&::after {
-		border-radius: calc($gift-dimension / 2) calc($gift-dimension / 2) 0 0;
-		top: -(calc($gift-dimension / 2));
-		transform: rotate(360deg);
-		box-shadow: 4px 0px 4px 0px rgb(0, 0, 0, 0.5);
+		border-radius: 0 0 calc($gift-dimension / 2) calc($gift-dimension / 2);
+		bottom: calc($gift-dimension / 2);
+		transform: rotate(180deg);
+		box-shadow: -4px 4px 5px 0px rgb(0, 0, 0, 0.2);
 	}
 
 	.bandroll {
 		$bandroll-width: 14px;
 		$bandroll-length: $gift-dimension;
-		$translate-position: -(calc(($bandroll-width - $bandroll-length) / 2));
-
+		$translate-position: calc(($bandroll-length - $bandroll-width) / 2);
+		$translate-position-2: -(calc(($bandroll-length) / 2));
 
 		position: absolute;
 		top: 0;
@@ -110,7 +108,8 @@
 		}
 
 		&.bandroll-2 {
-			transform: rotate(90deg) translateX($translate-position);
+			transform: rotate(90deg) translateY($translate-position-2) translateX(calc($translate-position - $gift-dimension / 2));
+			transform-origin: left;
 		}
 	}
 
@@ -149,19 +148,15 @@
 	}
 
 	&:not(.gift-box) {
+		border-bottom-right-radius: 12px;
 		transform: rotate(45deg) translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
-		transition: all linear .75s;
+		transition: transform linear .75s, border-radius ease-in .75s 3.5s;
+		animation: heart-beat 1s ease-in-out 3.5s infinite;
 
-		&::before {
-			display: block;
-			transform: rotate(90deg);
-			transition: display 1s linear 2s;
-		}
-
+		&::before,
 		&::after {
-			display: block;
-			transform: rotate(360deg);
-			transition: display 1s linear 2s;
+			height: $gift-dimension;
+			transition: height .75s ease-in 3.5s;
 		}
 
 		.bandroll {

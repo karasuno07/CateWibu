@@ -28,9 +28,9 @@ const OpenButton = () => {
 
          setTimeout(() => {
             BGM.play();
-         }, 5500);
 
-         //  HeartBumpAnimation.start();
+            // HeartBumpAnimation.start();
+         }, 5500);
       },
    };
    for (const [name, fn] of Object.entries(events)) {

@@ -3,8 +3,6 @@ import Canvas from './components/Canvas';
 import Counter from '~/components/Counter';
 import Gift from './components/Gift';
 
-console.log(BGM);
-
 import './index.scss';
 
 const root = document.getElementById('root');
