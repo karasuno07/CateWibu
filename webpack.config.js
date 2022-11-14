@@ -10,7 +10,21 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
-const cssStyleLoaders = ['style-loader', 'css-loader', 'postcss-loader'];
+const cssStyleLoaders = [
+   'style-loader',
+   {
+      loader: 'css-loader',
+      options: {
+         importLoaders: 1,
+         modules: {
+			exportGlobals: true,
+            auto: /\.module\.\w+$/i,
+            localIdentName: isProduction ? '[hash:base64:5]' : '[name]_[local]__[hash:base64:5]',
+         },
+      },
+   },
+   'postcss-loader',
+];
 
 const SOURCE_PATH = path.resolve(__dirname, 'src');
 const PUBLIC_PATH = path.resolve(__dirname, 'public');

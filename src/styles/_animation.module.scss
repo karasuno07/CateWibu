@@ -1,4 +1,6 @@
 @import 'src/styles/_library.scss';
+@import 'src/styles/_color.module.scss';
+@import 'src/styles/_variable.module.scss';
 
 @include keyframes(roll) {
 	0% {

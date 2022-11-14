@@ -1,17 +1,20 @@
-import { Wave } from '@foobar404/wave';
+import classNames from 'classnames/bind';
 
 import { HeartBump } from '~/animations';
 import Canvas from '~/components/Canvas';
 import Counter, { countEvent } from '~/components/Counter';
 import Audio from '~/components/BGM';
 
-const wave = new Wave(Audio, Canvas);
+import classes from './Gift.module.scss';
+
+const cx = classNames.bind(classes);
+const HeartBumpAnimation = HeartBump(Canvas);
 
 const OpenButton = () => {
    const element = document.createElement('button');
 
    const attributes = {
-      id: 'open-btn',
+      id: cx('open-btn'),
    };
    for (const [key, value] of Object.entries(attributes)) {
       element.setAttribute(key, value);
@@ -19,30 +22,38 @@ const OpenButton = () => {
 
    const events = {
       click: async function onClick(event) {
-         const giftContainer = document.getElementById('gift-container');
-         const openButton = document.getElementById('open-btn');
+         const giftContainer = document.getElementById(cx('gift-container'));
+         const openButton = document.getElementById(cx('open-btn'));
 
-         giftContainer.classList.toggle('gift-box');
-         openButton.classList.add('fade');
+         giftContainer.classList.toggle(cx('gift-box'));
+         openButton.classList.add(cx('fade'));
 
          setTimeout(() => {
             Counter.dispatchEvent(countEvent);
+            // HeartBumpAnimation.start();
          }, 3000);
 
          setTimeout(() => {
             Audio.play();
 
-            giftContainer.style.animation = 'expanding 2.5s ease-in-out forwards';
+            giftContainer.style.animation = `${cx('expanding')} 2.5s ease-in-out forwards`;
 
-            wave.addAnimation(
-               new wave.animations.Shine({
-                  glow: true,
-                  lineColor: 'red',
-				  rotate: true,
-               })
-            );
+            // wave.addAnimation(
+            //    new wave.animations.Shine({
+            //       glow: true,
+            //       lineColor: 'red',
+            // 	  rotate: true,
+            //    })
+            // );
 
-            // HeartBumpAnimation.start();
+            // wave.addAnimation(
+            //    new wave.animations.Glob({
+            //       fillColor: { gradient: ['red', 'blue', 'green'], rotate: 45 },
+            //       lineWidth: 10,
+            //       lineColor: '#fff',
+            //    })
+            // );
+            // wave
          }, 6500);
       },
    };
@@ -57,7 +68,7 @@ const Bandroll = ({ className }) => {
    const element = document.createElement('span');
 
    const attributes = {
-      class: _.isString(className) ? `bandroll ${className}` : 'bandroll',
+      class: _.isString(className) ? cx('bandroll', className): cx('bandroll'),
    };
    for (const [key, value] of Object.entries(attributes)) {
       element.setAttribute(key, value);
@@ -70,15 +81,15 @@ const Gift = () => {
    const element = document.createElement('div');
 
    const attributes = {
-      id: 'gift-container',
-      class: 'gift-box',
+      id: cx('gift-container'),
+      class: cx('gift-box'),
    };
    for (const [key, value] of Object.entries(attributes)) {
       element.setAttribute(key, value);
    }
 
-   element.appendChild(Bandroll({ className: 'bandroll-1' }));
-   element.appendChild(Bandroll({ className: 'bandroll-2' }));
+   element.appendChild(Bandroll({ className: cx('bandroll-1') }));
+   element.appendChild(Bandroll({ className: cx('bandroll-2') }));
    element.appendChild(OpenButton());
 
    return element;

@@ -1,12 +1,13 @@
 import BGM from '~/components/BGM';
-import Canvas from './components/Canvas';
 import Counter from '~/components/Counter';
+import Canvas from './components/Canvas';
 import Gift from './components/Gift';
+import Slide from './components/Slide';
 
 import './index.scss';
 
 const root = document.getElementById('root');
-const injectElements = [Canvas, Gift, BGM, Counter];
+const injectElements = [BGM, Canvas, Counter, Gift, Slide];
 
 injectElements.forEach((element) => root.appendChild(element));
 /* ===================================================================================================== */

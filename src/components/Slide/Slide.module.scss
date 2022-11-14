@@ -1,0 +1,19 @@
+@import 'src/styles/_library.scss';
+
+#slideshow {
+
+	@include absolute-center();
+	background-color: red;
+	width: 400px;
+	height: 600px;
+
+
+
+	.slide {
+
+		.image {
+
+			&.active {}
+		}
+	}
+}

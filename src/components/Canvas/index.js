@@ -1,7 +1,13 @@
+import classNames from 'classnames/bind';
+
+import classes from './Canvas.module.scss';
+
+const cx = classNames.bind(classes);
+
 const Canvas = () => {
    const element = document.createElement('canvas');
    const attributes = {
-      id: 'love-container',
+      id: cx('love-container'),
       width: window.width,
       height: window.height,
    };

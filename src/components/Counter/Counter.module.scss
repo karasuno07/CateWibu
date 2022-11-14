@@ -1,0 +1,27 @@
+@import 'src/styles/_library.scss';
+
+#counter {
+	@include absolute-center(0px, 0px);
+	opacity: 0;
+	width: 80pt;
+	height: 80pt;
+	transform-origin: bottom;
+	filter: url(#threshold) blur(0.6px);
+
+	&.show {
+		opacity: 1;
+		transition: opacity .5s linear;
+		z-index: 10;
+	}
+
+	#text-span {
+		position: absolute;
+		width: 100%;
+		display: inline-block;
+		font-family: "Raleway", sans-serif;
+		font-size: 80px;
+		text-align: center;
+		color: white;
+		user-select: none;
+	}
+}
