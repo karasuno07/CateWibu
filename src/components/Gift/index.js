@@ -1,10 +1,11 @@
-import _ from 'lodash';
+import { Wave } from '@foobar404/wave';
+
 import { HeartBump } from '~/animations';
 import Canvas from '~/components/Canvas';
 import Counter, { countEvent } from '~/components/Counter';
-import BGM from '~/components/BGM';
+import Audio from '~/components/BGM';
 
-const HeartBumpAnimation = HeartBump(Canvas);
+const wave = new Wave(Audio, Canvas);
 
 const OpenButton = () => {
    const element = document.createElement('button');
@@ -26,13 +27,23 @@ const OpenButton = () => {
 
          setTimeout(() => {
             Counter.dispatchEvent(countEvent);
-         }, 1500);
+         }, 3000);
 
          setTimeout(() => {
-            BGM.play();
+            Audio.play();
+
+            giftContainer.style.animation = 'expanding 2.5s ease-in-out forwards';
+
+            wave.addAnimation(
+               new wave.animations.Shine({
+                  glow: true,
+                  lineColor: 'red',
+				  rotate: true,
+               })
+            );
 
             // HeartBumpAnimation.start();
-         }, 5500);
+         }, 6500);
       },
    };
    for (const [name, fn] of Object.entries(events)) {

@@ -26,7 +26,7 @@ const config = {
    devServer: {
       open: true,
       host: 'localhost',
-      port: 3000,
+      port: 1911,
       compress: true,
       liveReload: true,
    },

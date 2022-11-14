@@ -1,6 +1,6 @@
 export const countEvent = new Event('count');
 
-const Counter = (countTimes = 5) => {
+const Counter = (countTimes = 3) => {
    const texts = new Array(countTimes)
       .fill('')
       .map((_, index) => index + 1)
@@ -19,7 +19,7 @@ const Counter = (countTimes = 5) => {
       let counter = setInterval(() => {
          if (pos === texts.length) {
             clearInterval(counter);
-            element.classList.remove('show');
+            element.remove();
          } else {
             textSpan1.textContent = texts[pos++];
          }

@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 export default class Point {
    constructor(x, y) {
       this.x = _.isNumber(x) ? x : 0;
