@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { settings } from '~/config';
 import Point from './Point';
 
