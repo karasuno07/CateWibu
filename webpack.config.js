@@ -1,7 +1,7 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require('path');
-const { ProvidePlugin } = require('webpack');
+const { DefinePlugin, ProvidePlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -17,7 +17,7 @@ const cssStyleLoaders = [
       options: {
          importLoaders: 1,
          modules: {
-			exportGlobals: true,
+            exportGlobals: true,
             auto: /\.module\.\w+$/i,
             localIdentName: isProduction ? '[hash:base64:5]' : '[name]_[local]__[hash:base64:5]',
          },
@@ -35,7 +35,6 @@ const config = {
    output: {
       path: BUILD_PATH,
       filename: isProduction ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js',
-      clean: true,
    },
    devServer: {
       open: true,
@@ -48,6 +47,9 @@ const config = {
       new HtmlWebpackPlugin({
          template: path.resolve(PUBLIC_PATH, 'index.html'),
          favicon: path.resolve(PUBLIC_PATH, 'favicon.ico'),
+      }),
+      new DefinePlugin({
+         ROOT_PATH: JSON.stringify(__dirname),
       }),
       new ProvidePlugin({
          _: 'lodash',
@@ -89,13 +91,28 @@ const config = {
             use: cssStyleLoaders,
          },
          {
-            test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+            test: /\.(woff|woff2|eot|ttf|otf)$/i,
             type: 'asset/resource',
+            generator: {
+               filename: 'fonts/[hash][ext][query]',
+            },
+         },
+         {
+            test: /\.(png|svg|jpg|jpeg|gif)$/i,
+            type: 'asset/resource',
+            generator: {
+               filename: 'images/[hash][ext][query]',
+            },
          },
 
          // Add your rules for custom modules here
          // Learn more about loaders from https://webpack.js.org/loaders/
       ],
+   },
+   resolve: {
+      fallback: {
+         fs: false,
+      },
    },
 };
 

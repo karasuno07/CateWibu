@@ -1,9 +1,10 @@
 import classNames from 'classnames/bind';
 
 import { HeartBump } from '~/animations';
+import Audio from '~/components/BGM';
 import Canvas from '~/components/Canvas';
 import Counter, { countEvent } from '~/components/Counter';
-import Audio from '~/components/BGM';
+import Slide, { slideEvent } from '~/components/Slide';
 
 import classes from './Gift.module.scss';
 
@@ -38,22 +39,7 @@ const OpenButton = () => {
 
             giftContainer.style.animation = `${cx('expanding')} 2.5s ease-in-out forwards`;
 
-            // wave.addAnimation(
-            //    new wave.animations.Shine({
-            //       glow: true,
-            //       lineColor: 'red',
-            // 	  rotate: true,
-            //    })
-            // );
-
-            // wave.addAnimation(
-            //    new wave.animations.Glob({
-            //       fillColor: { gradient: ['red', 'blue', 'green'], rotate: 45 },
-            //       lineWidth: 10,
-            //       lineColor: '#fff',
-            //    })
-            // );
-            // wave
+			Slide.dispatchEvent(slideEvent);
          }, 6500);
       },
    };
@@ -68,7 +54,7 @@ const Bandroll = ({ className }) => {
    const element = document.createElement('span');
 
    const attributes = {
-      class: _.isString(className) ? cx('bandroll', className): cx('bandroll'),
+      class: _.isString(className) ? cx('bandroll', className) : cx('bandroll'),
    };
    for (const [key, value] of Object.entries(attributes)) {
       element.setAttribute(key, value);

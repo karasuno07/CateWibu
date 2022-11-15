@@ -1,8 +1,8 @@
 import BGM from '~/components/BGM';
 import Counter from '~/components/Counter';
-import Canvas from './components/Canvas';
-import Gift from './components/Gift';
-import Slide from './components/Slide';
+import Canvas from '~/components/Canvas';
+import Gift from '~/components/Gift';
+import Slide from '~/components/Slide';
 
 import './index.scss';
 

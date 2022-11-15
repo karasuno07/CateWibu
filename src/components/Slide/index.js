@@ -1,11 +1,13 @@
 import classNames from 'classnames/bind';
 
+import { slide } from '~/config';
+
 import classes from './Slide.module.scss';
 
 const cx = classNames.bind(classes);
 
 const defaultOptions = {
-   delayTime: 1000,
+   delayTime: 2500,
 };
 
 export const slideEvent = new Event('slide');
@@ -27,9 +29,10 @@ const Slide = (images, userOptions) => {
          imageContainer.className = cx('slide');
 
          const image = new Image();
-         image.className = cx('image');
          image.src = source;
-         if (index === 0) image.classList.add(cx('active'));
+         image.alt = 'image-' + index + 1;
+
+         imageContainer.appendChild(image);
 
          element.appendChild(imageContainer);
          imageElements.push(imageContainer);
@@ -39,10 +42,20 @@ const Slide = (images, userOptions) => {
    const options = Object.assign(defaultOptions, userOptions);
 
    element.addEventListener(slideEvent.type, () => {
-      let intervel = setInterval(() => {}, options.delayTime);
+      element.classList.add(cx('show'));
+
+      let index = 0;
+
+      setInterval(() => {
+         if (index === imageElements.length) index = 0;
+
+         imageElements.forEach((el, idx) => el.classList.toggle(cx('active'), idx === index));
+
+		 index++;
+      }, options.delayTime);
    });
 
    return element;
 };
 
-export default Slide();
+export default Slide(slide.images, slide.config);

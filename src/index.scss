@@ -1,4 +1,4 @@
-@import 'src/styles/_color.module.scss';
+@import 'styles/_color.module.scss';
 
 * {
 	box-sizing: border-box;
@@ -12,4 +12,8 @@
 	height: 100vh;
 	background-color: $pink;
 	overflow: hidden
+}
+
+object {
+	border: none;
 }

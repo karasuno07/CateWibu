@@ -37,18 +37,18 @@
 
 	25% {
 		opacity: 0.33;
-		background-color: #ff3700;
+		background-color: $heart-red-1;
 	}
 
 	50% {
 		opacity: 0;
-		background-color: #ff0000;
+		background-color: $heart-red-2;
 		transform: scale(1.0) rotate(45deg) translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
 	}
 
 	75% {
 		opacity: 0.33;
-		background-color: #ff3700;
+		background-color: $heart-red-1;
 	}
 
 	100% {

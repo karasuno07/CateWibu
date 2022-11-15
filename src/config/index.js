@@ -1,3 +1,5 @@
+import importAll from '~/core/libs/resource';
+
 export const settings = {
    particles: {
       length: 500,
@@ -8,4 +10,9 @@ export const settings = {
    },
 };
 
-export default { settings };
+export const slide = {
+   images: importAll(require.context('../assets/images', false, /\.(png|jpe?g|svg)$/)),
+   config: {},
+};
+
+export default { settings, slide };
