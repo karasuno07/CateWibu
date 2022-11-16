@@ -53,22 +53,23 @@
 		justify-content: center;
 		align-items: center;
 		position: absolute;
-		width: calc($slide-width - $border-width * 2);
-		height: calc($slide-height - $border-width * 2);
-		border-radius: 50%;
-		transform: scale(0.01, 0.0075);
+		background-color: #fff;
+		width: 0;
+		height: 0;
+		border-radius: $border-radius - 7.5px;
 		overflow: hidden;
 
 		img {
-			max-width: 100%;
-			max-height: 100%;
+			width: calc($slide-width - $border-width * 2);
+			height: calc($slide-height - $border-width * 2);
 			outline: none;
+			border-radius: $border-radius - 7.5px;
 			overflow: inherit;
 			transition: transform .5s linear, filter .75s linear;
+			z-index: 10;
 		}
 
 		&.active {
-			z-index: 10;
 
 			img {
 				transform: scale(1, 1);
@@ -78,12 +79,11 @@
 		}
 
 		&:not(.active) {
-			z-index: 0;
 
 			img {
 				transform: scale(0, 0);
-				filter: blur(16px);
 				transform-origin: right;
+				filter: blur(16px);
 			}
 		}
 
@@ -94,18 +94,30 @@
 		width: $slide-width;
 		height: $slide-height;
 		transition-property: opacity, width, height;
-		transition-duration: .75s, 1.5s, .5s;
+		transition-duration: .75s, 1.25s, .5s;
 		transition-timing-function: ease-in-out;
 		transition-delay: 2s;
 
 
 		.slide {
-			background-color: #ffffff;
-			border-radius: $border-radius - 5px;
-			transform: scale(1);
-			transition-property: background-color, border-radius, transform, z-index;
-			transition-duration: .25s, .5s, .5s, 0s;
-			transition-delay: 3.5s, 3.5s, 3.5s, 1.5s;
+			width: calc($slide-width - $border-width * 2);
+			height: calc($slide-height - $border-width * 2);
+			transition: width 1.25s ease-in-out 2s, height .5s ease-in-out 2s;
+		}
+
+		&.start-slide {
+
+			.slide {
+				background-color: transparent;
+				transition: background-color 0.75s linear 1.5s;
+
+				img {
+					&.appear {
+						transform: scale(1);
+						transform-origin: center;
+					}
+				}
+			}
 		}
 	}
 

@@ -8,7 +8,7 @@ import Counter, { countEvent } from '~/components/Counter';
 import Slide, {
    showSlideEvent,
    startSlideEvent,
-   displayDialogueEvent,
+   showDialogueEvent,
    hideDialogueEvent,
 } from '~/components/Slide';
 
@@ -41,21 +41,24 @@ const OpenButton = () => {
 
          await sleep(3500);
 
-         Audio.play();
          giftContainer.style.animation = `${cx('expanding')} 2.5s ease-in-out forwards`;
          Slide.dispatchEvent(showSlideEvent);
 
          await sleep(4000);
 
-         Slide.dispatchEvent(displayDialogueEvent);
+         Slide.dispatchEvent(showDialogueEvent);
 
-         await sleep(7000);
+         await sleep(5500);
 
          Slide.dispatchEvent(hideDialogueEvent);
 
-         await sleep(2000);
+         await sleep(1500);
 
          Slide.dispatchEvent(startSlideEvent);
+
+         await sleep(3000);
+
+         Audio.play();
       },
    };
    for (const [name, fn] of Object.entries(events)) {

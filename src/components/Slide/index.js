@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import { createCustomEvent } from '~/core/libs/event';
-import { sleep } from '~/core/libs/asynchronous';
 
 import { slide } from '~/config';
 
@@ -8,7 +7,7 @@ import classes from './Slide.module.scss';
 
 const cx = classNames.bind(classes);
 
-let showSlideEvent, startSlideEvent, displayDialogueEvent, hideDialogueEvent;
+let showSlideEvent, startSlideEvent, pauseSlideEvent, showDialogueEvent, hideDialogueEvent;
 
 const Slide = (images, userOptions) => {
    const element = document.createElement('div');
@@ -28,7 +27,7 @@ const Slide = (images, userOptions) => {
 
          const image = new Image();
          image.src = source;
-         image.alt = 'image-' + index + 1;
+         image.alt = 'image-' + (index + 1);
 
          imageContainer.appendChild(image);
 
@@ -38,27 +37,35 @@ const Slide = (images, userOptions) => {
    }
 
    const defaultOptions = {
-      delayTime: 2500,
+      delayTime: 3000,
    };
    const options = Object.assign(defaultOptions, userOptions);
+
+   let slideIndex = 0,
+      slideInterval = undefined;
 
    showSlideEvent = createCustomEvent(element, 'show-slide', () => {
       element.classList.add(cx('show'));
    });
 
    startSlideEvent = createCustomEvent(element, 'start-slide', () => {
-      let index = 0;
+      element.classList.add(cx('start-slide'));
 
-      setInterval(() => {
-         if (index === imageElements.length) index = 0;
+      slideInterval = setInterval(() => {
+         if (slideIndex === imageElements.length) slideIndex = 0;
 
          imageElements.forEach(async (el, idx) => {
-            el.style.zIndex = 10 + idx;
-            el.classList.toggle(cx('active'), idx === index);
+            el.classList.toggle(cx('active'), idx === slideIndex);
          });
 
-         index++;
+         slideIndex++;
       }, options.delayTime);
+   });
+
+   pauseSlideEvent = createCustomEvent(element, 'pause-slide', () => {
+      element.classList.remove(cx('start-slide'));
+
+      if (slideInterval) clearInterval(slideInterval);
    });
 
    const textElement = document.createElement('p');
@@ -79,7 +86,7 @@ const Slide = (images, userOptions) => {
       '<span>&nbsp;them&nbsp;</span>' +
       '<span>all?</span>';
 
-   displayDialogueEvent = createCustomEvent(element, 'display-dialogue', () => {
+   showDialogueEvent = createCustomEvent(element, 'display-dialogue', () => {
       const spanElements = textElement.querySelectorAll('span');
 
       const duration = 1500;
@@ -119,6 +126,6 @@ const Slide = (images, userOptions) => {
    return element;
 };
 
-export { showSlideEvent, startSlideEvent, displayDialogueEvent, hideDialogueEvent };
+export { showSlideEvent, startSlideEvent, pauseSlideEvent, showDialogueEvent, hideDialogueEvent };
 
 export default Slide(slide.images, slide.config);
