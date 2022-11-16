@@ -1,3 +1,5 @@
+import { render } from './core/libs/render';
+
 import BGM from '~/components/BGM';
 import Counter from '~/components/Counter';
 import Canvas from '~/components/Canvas';
@@ -6,10 +8,7 @@ import Slide from '~/components/Slide';
 
 import './index.scss';
 
-const root = document.getElementById('root');
-const injectElements = [BGM, Canvas, Counter, Gift, Slide];
-
-injectElements.forEach((element) => root.appendChild(element));
+render([BGM, Canvas, Counter, Gift, Slide], document.getElementById('root'));
 /* ===================================================================================================== */
 
 const isProduction = process.env.NODE_ENV == 'production';

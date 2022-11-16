@@ -1,10 +1,11 @@
 import classNames from 'classnames/bind';
+import { createCustomEvent } from '~/core/libs/event';
 
 import classes from './Counter.module.scss';
 
 const cx = classNames.bind(classes);
 
-export const countEvent = new Event('count');
+let countEvent;
 
 const Counter = (countTimes = 3) => {
    const texts = new Array(countTimes)
@@ -19,7 +20,7 @@ const Counter = (countTimes = 3) => {
    const textSpan1 = document.createElement('span');
    textSpan1.id = cx('text-span');
 
-   element.addEventListener(countEvent.type, function () {
+   countEvent = createCustomEvent(element, 'count', function () {
       element.classList.add(cx('show'));
 
       let counter = setInterval(() => {
@@ -36,5 +37,7 @@ const Counter = (countTimes = 3) => {
 
    return element;
 };
+
+export { countEvent };
 
 export default Counter();

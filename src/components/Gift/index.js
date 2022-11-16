@@ -1,10 +1,16 @@
 import classNames from 'classnames/bind';
+import { sleep } from '~/core/libs/asynchronous';
 
 import { HeartBump } from '~/animations';
 import Audio from '~/components/BGM';
 import Canvas from '~/components/Canvas';
 import Counter, { countEvent } from '~/components/Counter';
-import Slide, { slideEvent } from '~/components/Slide';
+import Slide, {
+   showSlideEvent,
+   startSlideEvent,
+   displayDialogueEvent,
+   hideDialogueEvent,
+} from '~/components/Slide';
 
 import classes from './Gift.module.scss';
 
@@ -29,18 +35,27 @@ const OpenButton = () => {
          giftContainer.classList.toggle(cx('gift-box'));
          openButton.classList.add(cx('fade'));
 
-         setTimeout(() => {
-            Counter.dispatchEvent(countEvent);
-            // HeartBumpAnimation.start();
-         }, 3000);
+         await sleep(3000);
 
-         setTimeout(() => {
-            Audio.play();
+         Counter.dispatchEvent(countEvent);
 
-            giftContainer.style.animation = `${cx('expanding')} 2.5s ease-in-out forwards`;
+         await sleep(3500);
 
-			Slide.dispatchEvent(slideEvent);
-         }, 6500);
+         Audio.play();
+         giftContainer.style.animation = `${cx('expanding')} 2.5s ease-in-out forwards`;
+         Slide.dispatchEvent(showSlideEvent);
+
+         await sleep(4000);
+
+         Slide.dispatchEvent(displayDialogueEvent);
+
+         await sleep(7000);
+
+         Slide.dispatchEvent(hideDialogueEvent);
+
+         await sleep(2000);
+
+         Slide.dispatchEvent(startSlideEvent);
       },
    };
    for (const [name, fn] of Object.entries(events)) {

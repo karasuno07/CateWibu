@@ -1,4 +1,4 @@
-import importAll from '~/core/libs/resource';
+import { importAll } from '~/core/libs/resource';
 
 export const settings = {
    particles: {
