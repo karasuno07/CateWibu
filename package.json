@@ -28,7 +28,8 @@
     "workbox-webpack-plugin": "^6.5.4"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "wavesurfer.js": "^6.4.0"
   },
   "scripts": {
     "start": "yarn serve",

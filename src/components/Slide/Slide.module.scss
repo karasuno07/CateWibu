@@ -4,136 +4,143 @@
 @import 'src/styles/_icon.module.scss';
 
 #slideshow {
-	$slide-width: 320px;
-	$slide-height: 480px;
-	$border-width: 12px;
-	$border-radius: 20px;
+   $slide-width: 320px;
+   $slide-height: 480px;
+   $border-width: 12px;
+   $border-radius: 20px;
 
+   @include absolute-center();
+   display: flex;
+   justify-content: center;
+   gap: 5px;
+   width: 0;
+   height: 0;
+   opacity: 0;
+   border: $border-width solid transparent;
+   border-radius: $border-radius;
+   box-shadow: 3px 3px 5px 3px #00000013;
 
-	@include absolute-center();
-	display: flex;
-	justify-content: center;
-	gap: 5px;
-	width: 0;
-	height: 0;
-	opacity: 0;
-	border: $border-width solid transparent;
-	border-radius: $border-radius;
-	box-shadow: 3px 3px 5px 3px #00000013;
+   &::before {
+      $sticker-size: 70px;
 
+      position: absolute;
+      content: '';
+      top: -(calc($sticker-size / 2));
+      right: -(calc($sticker-size / 2));
+      background-image: $bunny;
+      width: $sticker-size;
+      height: $sticker-size;
+      background-size: contain;
+      z-index: 200;
+      filter: drop-shadow(2px 1px 2px $red) brightness(0.88);
+   }
 
-	&::before {
-		$sticker-size: 70px;
+   &::after {
+      position: absolute;
+      content: '';
+      top: -$border-width;
+      bottom: -$border-width;
+      left: -$border-width;
+      right: -$border-width;
+      background: linear-gradient(
+         rgba($color: $purple, $alpha: 0.35),
+         rgba($color: $blue, $alpha: 0.25),
+         rgba($color: $light-red, $alpha: 0.25)
+      );
+      border-radius: $border-radius;
+   }
 
-		position: absolute;
-		content: '';
-		top: -(calc($sticker-size / 2));
-		right: -(calc($sticker-size / 2));
-		background-image: $bunny;
-		width: $sticker-size;
-		height: $sticker-size;
-		background-size: contain;
-		z-index: 200;
-		filter: drop-shadow(2px 1px 2px $red) brightness(0.88);
-	}
+   .slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      background-color: #fff;
+      width: 0;
+      height: 0;
+      border-radius: $border-radius - 7.5px;
+      overflow: hidden;
 
-	&::after {
-		position: absolute;
-		content: '';
-		top: -$border-width;
-		bottom: -$border-width;
-		left: -$border-width;
-		right: -$border-width;
-		background: linear-gradient(rgba($color: $purple, $alpha: 0.35), rgba($color: $blue, $alpha: 0.25), rgba($color: $light-red, $alpha: 0.25));
-		border-radius: $border-radius;
-	}
+      img {
+         width: calc($slide-width - $border-width * 2);
+         height: calc($slide-height - $border-width * 2);
+         outline: none;
+         border-radius: $border-radius - 7.5px;
+         overflow: inherit;
+         transition: transform 0.5s linear, filter 0.75s linear;
+         z-index: 10;
+      }
 
-	.slide {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		position: absolute;
-		background-color: #fff;
-		width: 0;
-		height: 0;
-		border-radius: $border-radius - 7.5px;
-		overflow: hidden;
+      &.active {
+         img {
+            transform: scale(1, 1);
+            transform-origin: bottom left;
+            filter: blur(0);
+         }
+      }
 
-		img {
-			width: calc($slide-width - $border-width * 2);
-			height: calc($slide-height - $border-width * 2);
-			outline: none;
-			border-radius: $border-radius - 7.5px;
-			overflow: inherit;
-			transition: transform .5s linear, filter .75s linear;
-			z-index: 10;
-		}
+      &:not(.active) {
+         img {
+            transform: scale(0, 0);
+            transform-origin: bottom right;
+            filter: blur(16px);
+         }
+      }
+   }
 
-		&.active {
+   &.show {
+      opacity: 1;
+      width: $slide-width;
+      height: $slide-height;
+      transition-property: opacity, width, height;
+      transition-duration: 0.75s, 1.25s, 0.5s;
+      transition-timing-function: ease-in-out;
+      transition-delay: 2s;
 
-			img {
-				transform: scale(1, 1);
-				transform-origin: left;
-				filter: blur(0);
-			}
-		}
+      .slide {
+         width: calc($slide-width - $border-width * 2);
+         height: calc($slide-height - $border-width * 2);
+         transition: width 1.25s ease-in-out 2s, height 0.5s ease-in-out 2s;
+      }
 
-		&:not(.active) {
+      &.start-slide {
+         .slide {
+            background-color: transparent;
 
-			img {
-				transform: scale(0, 0);
-				transform-origin: right;
-				filter: blur(16px);
-			}
-		}
+            &::before {
+               content: '';
+               background-color: #fff;
+               position: absolute;
+               top: 2px;
+               left: 2px;
+               bottom: 2px;
+               right: 2px;
+			   border-radius: $border-radius - 7.5px;
+            }
 
-	}
+            img {
+               &.appear {
+                  transform: scale(1);
+                  transform-origin: center;
+               }
+            }
+         }
+      }
+   }
 
-	&.show {
-		opacity: 1;
-		width: $slide-width;
-		height: $slide-height;
-		transition-property: opacity, width, height;
-		transition-duration: .75s, 1.25s, .5s;
-		transition-timing-function: ease-in-out;
-		transition-delay: 2s;
+   #dialogue {
+      font-family: 'FairyCosmo';
+      font-size: 50px;
+      color: #00000075;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      z-index: 10;
 
-
-		.slide {
-			width: calc($slide-width - $border-width * 2);
-			height: calc($slide-height - $border-width * 2);
-			transition: width 1.25s ease-in-out 2s, height .5s ease-in-out 2s;
-		}
-
-		&.start-slide {
-
-			.slide {
-				background-color: transparent;
-				transition: background-color 0.75s linear 1.5s;
-
-				img {
-					&.appear {
-						transform: scale(1);
-						transform-origin: center;
-					}
-				}
-			}
-		}
-	}
-
-	#dialogue {
-		font-family: 'FairyCosmo';
-		font-size: 50px;
-		color: #00000075;
-		text-align: center;
-		margin: 0;
-		padding: 20px;
-		z-index: 10;
-
-		&>span {
-			display: inline-block;
-			opacity: 0;
-			filter: blur(2px);
-		}
-	}
+      & > span {
+         display: inline-block;
+         opacity: 0;
+         filter: blur(2px);
+      }
+   }
 }
