@@ -50,6 +50,7 @@ const config = {
       }),
       new DefinePlugin({
          ROOT_PATH: JSON.stringify(__dirname),
+         isProduction,
       }),
       new ProvidePlugin({
          _: 'lodash',

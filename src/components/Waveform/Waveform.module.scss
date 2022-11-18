@@ -1,3 +1,22 @@
+@import 'src/styles/_library.scss';
+
 #waveform {
-    
+   opacity: 0;
+   @include absolute-center(0px, 270px);
+   width: 320px;
+   z-index: 200;
+
+   wave {
+      transform: scaleX(0);
+      transition: transform .25s linear;
+   }
+
+   &.show {
+      opacity: 1;
+
+      wave {
+         transform: scaleX(1);
+         transition: transform .5s linear 0.35s;
+      }
+   }
 }

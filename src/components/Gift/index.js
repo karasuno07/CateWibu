@@ -1,9 +1,7 @@
 import classNames from 'classnames/bind';
 import { sleep } from '~/core/libs/asynchronous';
 
-import { HeartBump } from '~/animations';
-import Audio from '~/components/BGM';
-import Canvas from '~/components/Canvas';
+import { wavesurfer as Audio } from '~/components/Waveform';
 import Counter, { countEvent } from '~/components/Counter';
 import Slide, {
    showSlideEvent,
@@ -15,7 +13,6 @@ import Slide, {
 import classes from './Gift.module.scss';
 
 const cx = classNames.bind(classes);
-const HeartBumpAnimation = HeartBump(Canvas);
 
 const OpenButton = () => {
    const element = document.createElement('button');
@@ -58,6 +55,7 @@ const OpenButton = () => {
 
          await sleep(3000);
 
+         Audio.container.classList.add(cx('show'));
          Audio.play();
       },
    };
