@@ -32,7 +32,7 @@
       height: $sticker-size;
       background-size: contain;
       z-index: 200;
-      filter: drop-shadow(2px 1px 2px $red) brightness(0.88);
+      filter: drop-shadow(2px 1px 2px $light-red) brightness(0.88);
    }
 
    &::after {

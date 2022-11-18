@@ -47,11 +47,11 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		background-color: $orange;
+		background-color: $light-pink;
 		width: $bandroll-length;
 		height: $bandroll-width;
 		border-radius: 5px;
-		border-style: double;
+		border-style: hidden;
 		border-color: brown;
 		z-index: 2;
 
@@ -75,9 +75,9 @@
 		width: $circle-width;
 		height: $circle-width;
 		transform: translate(-50%, -50%);
-		background-color: $red;
+		background-color: $darken-ocean;
 		background-image: $star;
-		background-size: 36px;
+		background-size: 32px;
 		background-position: center;
 		background-repeat: no-repeat;
 		border-width: 0;
@@ -90,7 +90,7 @@
 
 		&:hover {
 			cursor: grab;
-			background-color: $darken-red;
+			background-color: $darken-blue;
 		}
 
 		&:active {
