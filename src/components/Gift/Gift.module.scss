@@ -1,4 +1,3 @@
-
 @import 'src/styles/_library.scss';
 @import 'src/styles/_animation.module.scss';
 @import 'src/styles/_color.module.scss';
@@ -6,128 +5,128 @@
 @import 'src/styles/_icon.module.scss';
 @import 'src/styles/_variable.module.scss';
 
-
 #gift-container {
-	@include absolute-center-no-transform($gift-dimension, $gift-dimension);
-	background-color: rgba($color: $primary, $alpha: 0.5);
-	box-shadow: 5px 5px 10px 0px rgb(0, 0, 0, 0.33);
-	z-index: 1;
+   @include absolute-center-no-transform($gift-dimension, $gift-dimension);
+   background-color: rgba($color: $primary, $alpha: 0.5);
+   box-shadow: 5px 5px 10px 0px rgb(0, 0, 0, 0.33);
+   z-index: 1;
 
-	&::before,
-	&::after {
-		content: '';
-		position: absolute;
-		border-width: 0;
-		background-color: inherit;
-		width: $gift-dimension;
-		height: 0;
-	}
+   &::before,
+   &::after {
+      content: '';
+      position: absolute;
+      border-width: 0;
+      background-color: inherit;
+      width: $gift-dimension;
+      height: 0;
+   }
 
-	&::before {
-		border-radius: 0 0 calc($gift-dimension / 2) calc($gift-dimension / 2);
-		right: calc($gift-dimension / 2);
-		transform: rotate(90deg) translateX($gift-dimension);
-		transform-origin: top right;
-		box-shadow: 4px 4px 5px 0px rgb(0, 0, 0, 0.2);
-	}
+   &::before {
+      border-radius: 0 0 calc($gift-dimension / 2) calc($gift-dimension / 2);
+      right: calc($gift-dimension / 2);
+      transform: rotate(90deg) translateX($gift-dimension);
+      transform-origin: top right;
+      box-shadow: 4px 4px 5px 0px rgb(0, 0, 0, 0.2);
+   }
 
-	&::after {
-		border-radius: 0 0 calc($gift-dimension / 2) calc($gift-dimension / 2);
-		bottom: calc($gift-dimension / 2);
-		transform: rotate(180deg);
-		box-shadow: -4px 4px 5px 0px rgb(0, 0, 0, 0.2);
-	}
+   &::after {
+      border-radius: 0 0 calc($gift-dimension / 2) calc($gift-dimension / 2);
+      bottom: calc($gift-dimension / 2);
+      transform: rotate(180deg);
+      box-shadow: -4px 4px 5px 0px rgb(0, 0, 0, 0.2);
+   }
 
-	.bandroll {
-		$bandroll-width: 14px;
-		$bandroll-length: $gift-dimension;
-		$translate-position: calc(($bandroll-length - $bandroll-width) / 2);
-		$translate-position-2: -(calc(($bandroll-length) / 2));
+   .bandroll {
+      $bandroll-width: 14px;
+      $bandroll-length: $gift-dimension;
+      $translate-position: calc(($bandroll-length - $bandroll-width) / 2);
+      $translate-position-2: -(calc(($bandroll-length) / 2));
 
-		position: absolute;
-		top: 0;
-		left: 0;
-		background-color: $light-pink;
-		width: $bandroll-length;
-		height: $bandroll-width;
-		border-radius: 5px;
-		border-style: hidden;
-		border-color: brown;
-		z-index: 2;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: $light-pink;
+      width: $bandroll-length;
+      height: $bandroll-width;
+      border-radius: 5px;
+      border-style: hidden;
+      z-index: 2;
 
-		&.bandroll-1 {
-			transform: translateY($translate-position);
-		}
+      &.bandroll-1 {
+         transform: translateY($translate-position);
+      }
 
-		&.bandroll-2 {
-			transform: rotate(90deg) translateY($translate-position-2) translateX(calc($translate-position - $gift-dimension / 2));
-			transform-origin: left;
-		}
-	}
+      &.bandroll-2 {
+         transform: rotate(90deg) translateY($translate-position-2)
+            translateX(calc($translate-position - $gift-dimension / 2));
+         transform-origin: left;
+      }
+   }
 
-	#open-btn {
-		$circle-width: 50px;
+   #open-btn {
+      $circle-width: 80px;
 
-		position: absolute;
-		top: $circle-width * 2;
-		left: $circle-width * 2;
-		border-radius: 50%;
-		width: $circle-width;
-		height: $circle-width;
-		transform: translate(-50%, -50%);
-		background-color: $darken-ocean;
-		background-image: $star;
-		background-size: 32px;
-		background-position: center;
-		background-repeat: no-repeat;
-		border-width: 0;
-		box-shadow: 1px 1px 3px 3px rgb(0, 0, 0, 0.5);
-		z-index: 100;
+      @include absolute-center();
+      border-radius: 50%;
+      width: $circle-width;
+      height: $circle-width;
+      background-color: transparentize($color: #fff, $amount: 0.85);
+      background-image: $star;
+      background-size: calc($circle-width * 3 / 4);
+      background-position: center;
+      background-repeat: no-repeat;
+      border-width: 0;
+      box-shadow: inset -6px -6px 8px -1px rgba($color: pink, $alpha: 0.75),
+         inset 6px 6px 8px -1px rgba($color: pink, $alpha: 0.75);
+      z-index: 100;
 
-		&.fade {
-			animation: fade-in .5s linear 1s forwards;
-		}
+      &.fade {
+         animation: fade-in 0.5s linear 1s forwards;
+      }
 
-		&:hover {
-			cursor: grab;
-			background-color: $darken-blue;
-		}
+      &:hover {
+         cursor: grab;
+      }
 
-		&:active {
-			background-size: 32px;
-			box-shadow: 1px 1px 3px 1px rgb(0, 0, 0, 0.75);
-		}
-	}
+      &:active {
+         background-size: calc($circle-width / 2);
+         width: calc($circle-width * 3 / 4);
+         height: calc($circle-width * 3 / 4);
+      }
+   }
 
-	&:not(.gift-box) {
-		border-bottom-right-radius: 12px;
-		transform: scale(0.8) rotate(45deg) translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
-		transition: transform linear .75s, border-radius ease-in .75s 3.5s;
-		animation: heart-beat 1s ease-in-out 3.5s infinite;
+   &:not(.gift-box) {
+      border-bottom-right-radius: 12px;
+      transform: scale(0.8) rotate(45deg)
+         translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
+      transition: transform linear 0.75s, border-radius ease-in 0.75s 3.5s;
+      animation: heart-beat 1s ease-in-out 3.5s infinite;
 
-		&::before,
-		&::after {
-			height: $gift-dimension;
-			transition: height .75s ease-in 3.5s;
-		}
+      &::before,
+      &::after {
+         height: $gift-dimension;
+         transition: height 0.75s ease-in 3.5s;
+      }
 
-		.bandroll {
-			&.bandroll-1 {
-				animation: roll 1s ease-in 1.5s forwards;
-			}
+      .bandroll {
+         &.bandroll-1 {
+            animation: roll 1s ease-in 1.5s forwards;
+         }
 
-			&.bandroll-2 {
-				animation: roll 1s ease-in 2.5s forwards;
-			}
-		}
-	}
+         &.bandroll-2 {
+            animation: roll 1s ease-in 2.5s forwards;
+         }
+      }
 
-	&.gift-box {
-		transform: rotate(-180deg);
-		box-shadow: -5px -5px 10px 0px rgb(0, 0, 0, 0.5);
+	  #open-btn {
+		box-shadow: none;
+		background-color: transparent;
+		transition: all .25s linear;
+	  }
+   }
 
-		#open-btn {
-			box-shadow: -1px -1px 3px 3px rgb(0, 0, 0, 0.5);
-		}
-	}
+   &.gift-box {
+      transform: rotate(-180deg);
+      box-shadow: -5px -5px 10px 0px rgb(0, 0, 0, 0.5);
+   }
 }

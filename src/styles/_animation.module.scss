@@ -3,72 +3,75 @@
 @import 'src/styles/_variable.module.scss';
 
 @include keyframes(roll) {
-	0% {
-		opacity: 1;
-	}
+   0% {
+      opacity: 1;
+   }
 
-	90% {
-		opacity: 0.9111;
-	}
+   90% {
+      opacity: 0.9111;
+   }
 
-	100% {
-		opacity: 0;
-		width: 0;
-	}
+   100% {
+      opacity: 0;
+      width: 0;
+   }
 }
 
 @include keyframes(fade-in) {
-	0% {
-		opacity: 1;
-	}
+   0% {
+      opacity: 1;
+   }
 
-	100% {
-		opacity: 0;
-		width: 0;
-		height: 0;
-	}
+   100% {
+      opacity: 0;
+      width: 0;
+      height: 0;
+   }
 }
 
 @include keyframes(heart-beat) {
-	0% {
-		opacity: 0.9;
-		background-color: rgba($color: $blue, $alpha: 0.4);
-	}
+   0% {
+      opacity: 0.9;
+      background-color: rgba($color: $blue, $alpha: 0.4);
+   }
 
-	25% {
-		opacity: 0.33;
-		background-color: $heart-red-1;
-	}
+   25% {
+      opacity: 0.33;
+      background-color: $heart-red-1;
+   }
 
-	50% {
-		opacity: 0;
-		background-color: $heart-red-2;
-		transform: scale(1.0) rotate(45deg) translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
-	}
+   50% {
+      opacity: 0;
+      background-color: $heart-red-2;
+      transform: scale(1) rotate(45deg)
+         translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
+   }
 
-	75% {
-		opacity: 0.33;
-		background-color: $heart-red-1;
-	}
+   75% {
+      opacity: 0.33;
+      background-color: $heart-red-1;
+   }
 
-	100% {
-		opacity: 0.9;
-		background-color: rgba($color: $blue, $alpha: 0.4);
-	}
+   100% {
+      opacity: 0.9;
+      background-color: rgba($color: $blue, $alpha: 0.4);
+   }
 }
 
 @include keyframes(expanding) {
-	0% {
-		opacity: 0.9;
-		transform: scale(1.0) rotate(45deg) translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
-	}
+   0% {
+      opacity: 0.9;
+      transform: scale(1) rotate(45deg)
+         translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
+   }
 
-	70% {
-		opacity: 0.25;
-		transform: scale(5) rotate(45deg) translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
-	}
+   70% {
+      opacity: 0.25;
+      transform: scale(5) rotate(45deg)
+         translate(calc($gift-dimension / 20), calc($gift-dimension / 20));
+   }
 
-	100% {
-		opacity: 0;
-	}
+   100% {
+      opacity: 0;
+   }
 }
