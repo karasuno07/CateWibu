@@ -7,7 +7,7 @@ const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { v5: uuid } = require('uuid');
+const { v4: uuid } = require('uuid');
 
 const currentDate = new Date();
 const isProduction = process.env.NODE_ENV == 'production';
@@ -126,7 +126,7 @@ module.exports = () => {
       config.plugins.push(
          // @ts-ignore
          new WorkboxWebpackPlugin.GenerateSW({
-            cacheId: `Gift for Yen Nhi ver. ${currentDate.getMonth()}${currentDate.getDate()}${currentDate.getFullYear()}-${uuid}`,
+            cacheId: `Gift for Yen Nhi ver. ${currentDate.getMonth()}${currentDate.getDate()}${currentDate.getFullYear()}-${uuid()}`,
          }),
          new CopyWebpackPlugin({
             patterns: [
