@@ -127,6 +127,7 @@ module.exports = () => {
          // @ts-ignore
          new WorkboxWebpackPlugin.GenerateSW({
             cacheId: `Gift for Yen Nhi ver. ${currentDate.getMonth()}${currentDate.getDate()}${currentDate.getFullYear()}}`,
+            swDest: path.resolve(PUBLIC_PATH, 'sw.js'),
             cleanupOutdatedCaches: true,
             clientsClaim: true,
             skipWaiting: true,
