@@ -126,7 +126,25 @@ module.exports = () => {
       config.plugins.push(
          // @ts-ignore
          new WorkboxWebpackPlugin.GenerateSW({
-            cacheId: `Gift for Yen Nhi ver. ${currentDate.getMonth()}${currentDate.getDate()}${currentDate.getFullYear()}-${uuid()}`,
+            cacheId: `Gift for Yen Nhi ver. ${currentDate.getMonth()}${currentDate.getDate()}${currentDate.getFullYear()}}`,
+            cleanupOutdatedCaches: true,
+            clientsClaim: true,
+            skipWaiting: true,
+            runtimeCaching: [
+               {
+                  urlPattern: /\.js$/i,
+                  handler: 'NetworkFirst',
+                  options: {
+                     cacheName: `javascript-content-${uuid()}`,
+                     backgroundSync: {
+                        name: 'synchronize js files in background',
+                     },
+                     expiration: {
+                        maxAgeSeconds: 86400,
+                     },
+                  },
+               },
+            ],
          }),
          new CopyWebpackPlugin({
             patterns: [
