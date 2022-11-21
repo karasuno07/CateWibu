@@ -137,9 +137,9 @@ module.exports = () => {
                   handler: 'NetworkFirst',
                   options: {
                      cacheName: `javascript-content-${uuid()}`,
-                     backgroundSync: {
-                        name: 'synchronize js files in background',
-                     },
+                     // backgroundSync: {
+                     //    name: 'synchronize js files in background',
+                     // },
                      expiration: {
                         maxAgeSeconds: 86400,
                      },
