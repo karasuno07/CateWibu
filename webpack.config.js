@@ -126,7 +126,6 @@ module.exports = () => {
       config.plugins.push(
          // @ts-ignore
          new WorkboxWebpackPlugin.GenerateSW({
-            cacheId: `Gift for Yen Nhi ver. ${currentDate.getMonth()}${currentDate.getDate()}${currentDate.getFullYear()}}`,
             swDest: path.resolve(PUBLIC_PATH, 'sw.js'),
             cleanupOutdatedCaches: true,
             clientsClaim: true,
@@ -140,6 +139,26 @@ module.exports = () => {
                      backgroundSync: {
                         name: 'synchronize js files in background',
                      },
+                     expiration: {
+                        maxAgeSeconds: 86400,
+                     },
+                  },
+               },
+               {
+                  urlPattern: /\.(png|svg|jpg|jpeg|gif)$/i,
+                  handler: 'CacheFirst',
+                  options: {
+                     cacheName: `image-content-${uuid()}`,
+                     expiration: {
+                        maxAgeSeconds: 86400,
+                     },
+                  },
+               },
+               {
+                  urlPattern: 'index.html',
+                  handler: 'CacheFirst',
+                  options: {
+                     cacheName: 'html index file',
                      expiration: {
                         maxAgeSeconds: 86400,
                      },
