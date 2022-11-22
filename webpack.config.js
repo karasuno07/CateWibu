@@ -126,6 +126,9 @@ module.exports = () => {
       config.plugins.push(
          // @ts-ignore
          new WorkboxWebpackPlugin.GenerateSW({
+            cacheName:
+               'Gift for Yen Nhi ver. ' +
+               `${currentDate.getMonth()}${currentDate.getDate}${currentDate.getFullYear}`,
             cleanupOutdatedCaches: true,
             clientsClaim: true,
             skipWaiting: true,
@@ -153,16 +156,16 @@ module.exports = () => {
                      },
                   },
                },
-               {
-                  urlPattern: 'index.html',
-                  handler: 'CacheFirst',
-                  options: {
-                     cacheName: 'html index file',
-                     expiration: {
-                        maxAgeSeconds: 86400,
-                     },
-                  },
-               },
+               // {
+               //    urlPattern: 'index.html',
+               //    handler: 'CacheFirst',
+               //    options: {
+               //       cacheName: 'html index file',
+               //       expiration: {
+               //          maxAgeSeconds: 86400,
+               //       },
+               //    },
+               // },
             ],
          }),
          new CopyWebpackPlugin({
