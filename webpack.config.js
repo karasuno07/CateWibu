@@ -126,8 +126,8 @@ module.exports = () => {
       config.plugins.push(
          // @ts-ignore
          new WorkboxWebpackPlugin.GenerateSW({
-            cacheName:
-               'Gift for Yen Nhi ver. ' +
+            cacheId:
+               'Cate Wibu ver. ' +
                `${currentDate.getMonth()}${currentDate.getDate}${currentDate.getFullYear}`,
             cleanupOutdatedCaches: true,
             clientsClaim: true,

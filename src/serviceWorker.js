@@ -3,16 +3,16 @@ if (isProduction && 'serviceWorker' in navigator) {
       navigator.serviceWorker
          .register('service-worker.js', { scope: './' })
          .then((registration) => {
-            // if ('PushManager' in window && registration.active) {
-            //    registration.pushManager.subscribe({ userVisibleOnly: true }).then(
-            //       (pushSubscription) => {
-            //          console.log('Fired a push event: ', pushSubscription.endpoint);
-            //       },
-            //       (error) => {
-            //          console.error(error);
-            //       }
-            //    );
-            // }
+            if ('PushManager' in window && registration.active) {
+               registration.pushManager.subscribe({ userVisibleOnly: true }).then(
+                  (pushSubscription) => {
+                     console.log('Fired a push event: ', pushSubscription.endpoint);
+                  },
+                  (error) => {
+                     console.error(error);
+                  }
+               );
+            }
 
             registration.addEventListener('updatefound', () => {
                const installingWorker = registration.installing;
