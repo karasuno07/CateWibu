@@ -126,7 +126,6 @@ module.exports = () => {
       config.plugins.push(
          // @ts-ignore
          new WorkboxWebpackPlugin.GenerateSW({
-            swDest: path.resolve(PUBLIC_PATH, 'sw.js'),
             cleanupOutdatedCaches: true,
             clientsClaim: true,
             skipWaiting: true,
