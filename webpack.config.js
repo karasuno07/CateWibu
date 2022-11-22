@@ -126,7 +126,7 @@ module.exports = () => {
       config.plugins.push(
          // @ts-ignore
          new WorkboxWebpackPlugin.GenerateSW({
-            cleanupOutdatedCaches: true,
+            // cleanupOutdatedCaches: true,
             clientsClaim: true,
             skipWaiting: true,
             runtimeCaching: [
