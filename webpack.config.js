@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { v4: uuid } = require('uuid');
 
@@ -75,6 +76,7 @@ const config = {
             };
          },
       }),
+      new ESLintPlugin(),
 
       // Add your plugins here
       // Learn more about plugins from https://webpack.js.org/configuration/plugins/

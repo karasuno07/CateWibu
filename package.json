@@ -14,6 +14,8 @@
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
+    "eslint": "^8.31.0",
+    "eslint-webpack-plugin": "^3.2.0",
     "html-webpack-plugin": "^5.5.0",
     "postcss": "^8.4.18",
     "postcss-loader": "^7.0.1",
@@ -29,6 +31,7 @@
     "workbox-webpack-plugin": "^6.5.4"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.19.1",
     "lodash": "^4.17.21",
     "wavesurfer.js": "^6.4.0"
   },
